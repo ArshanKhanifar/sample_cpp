@@ -9,9 +9,19 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
 message("generated files will be at: ${CMAKE_BINARY_DIR}")
 
+add_executable(cmake_hello main.cpp)
+
 add_subdirectory(lib/math)
 
-add_executable(cmake_hello main.cpp)
+find_package(Boost 1.66)
+
+if (Boost_FOUND)
+        message("Boost Found")
+        include_directories(${Boost_INCLUDE_DIRS})
+        target_link_libraries(cmake_hello ${Boost_LIBRARIES})
+elseif(NOT Boost_FOUND)
+        message(FATAL_ERROR "Boost Not Found")
+endif()
 
 target_link_libraries(cmake_hello math)
 
