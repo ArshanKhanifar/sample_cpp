@@ -25,3 +25,10 @@ endif()
 
 target_link_libraries(cmake_hello math)
 
+if(${CMAKE_BUILD_TYPE} MATCHES Debug)
+    message("Debug Build")
+elseif(${CMAKE_BUILD_TYPE} MATCHES Release)
+    message("Release Build")
+endif()
+
+
